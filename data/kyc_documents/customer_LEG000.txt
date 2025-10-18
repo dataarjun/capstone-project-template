@@ -1,0 +1,23 @@
+
+KYC Document - Legitimate Business 0
+Customer ID: LEG000
+Date: 2025-10-17
+
+CUSTOMER INFORMATION:
+- Name: Legitimate Business 0
+- Type: business
+- Location: Phoenix, US
+- Risk Level: LOW
+- KYC Status: verified
+
+BUSINESS DETAILS:
+- Established: 2024-12-25
+- Primary Activities: business operations
+
+COMPLIANCE STATUS:
+- Identity verification: COMPLETED
+- Address verification: COMPLETED
+- Business registration: VERIFIED
+- Financial statements: PROVIDED
+- No adverse media found
+- Standard risk profile

@@ -423,8 +423,19 @@ $RECYCLE.BIN/
 .nfs*
 
 # Project specific
-data/
-*.csv
+# Keep small sample data files, ignore large datasets
+data/raw/
+data/sampledata/
+data/processed/
+data/kyc_vectordb/
+data/*.db
+data/*.sqlite*
+data/*.csv
+!data/raw/sample_*.csv
+!data/raw/small_*.csv
+
+# Generated files
+reports/
 *.json
 *.pkl
 *.pickle
@@ -435,15 +446,46 @@ results/
 outputs/
 experiments/
 
-# Jupyter Notebook outputs
-*.ipynb
+# Jupyter Notebook outputs (keep notebooks, ignore checkpoints)
+.ipynb_checkpoints/
 
 # Large files
 *.h5
 *.hdf5
 *.npy
 *.npz
+*.pdf
+*.whl
+
+# Database files
+*.db
+*.sqlite*
+*.sqlite3
+
+# Environment and config files
+.env*
+!.env.example
+config.local.*
+secrets.*
 
 # Temporary files
 tmp/
 temp/
+*.tmp
+*.temp
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

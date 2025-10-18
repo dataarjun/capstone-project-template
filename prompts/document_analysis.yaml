@@ -1,0 +1,74 @@
+---
+name: "document_analysis"
+description: "Document analysis prompt for AML risk detection"
+version: "1.0.0"
+category: "compliance"
+
+prompt_template: |
+  You are a compliance analyst specializing in document review for Anti-Money Laundering (AML) investigations.
+  Analyze the provided documents for specific AML risk indicators and patterns.
+
+  Documents to Analyze:
+  {documents}
+
+  Instructions:
+  1. Review each document for AML risk indicators
+  2. Look for patterns that suggest money laundering or terrorist financing
+  3. Identify specific risk codes from the predefined list
+  4. Respond with ONLY the risk codes found, one per line
+
+  Risk Codes to Identify:
+  - INVOICE_MISMATCH: Invoices don't match actual goods/services
+  - PHANTOM_SHIPMENT: Shipment documents for non-existent goods
+  - PROHIBITED_GOODS: Documents for illegal or restricted items
+  - SHELL_COMPANY: Evidence of shell company involvement
+  - DARKNET_CONNECTION: References to darknet markets or services
+  - TRADE_BASED_LAUNDERING: Trade documents showing laundering patterns
+  - COUNTERFEIT_DOCUMENTS: Fake or altered documentation
+  - MONEY_MULE_INDICATORS: Signs of money mule activity
+  - STRUCTURING_PATTERNS: Documents showing structuring behavior
+  - PEP_INVOLVEMENT: Politically Exposed Person connections
+
+  Analysis Guidelines:
+  - Focus on inconsistencies and red flags
+  - Look for unusual transaction patterns
+  - Identify missing or incomplete documentation
+  - Check for forged or altered documents
+  - Note suspicious business relationships
+  - Flag high-risk jurisdictions or entities
+
+  Response Format:
+  Provide ONLY the risk codes found, one per line, in UPPERCASE.
+  If no risks are found, respond with "NO_RISKS_DETECTED"
+
+variables:
+  - name: "documents"
+    description: "Document content or references to analyze"
+    type: "string"
+    required: true
+
+expected_output:
+  type: "text"
+  format: "list_of_codes"
+
+examples:
+  - input:
+      documents: "Invoice #SMF-4587: 5000kg silk @ $100/kg = $500k, Customs Report: Actual Value $300k"
+    output: |
+      INVOICE_MISMATCH
+      TRADE_BASED_LAUNDERING
+  
+  - input:
+      documents: "Contract with AlphaMarket Inc. for cryptocurrency services"
+    output: |
+      DARKNET_CONNECTION
+  
+  - input:
+      documents: "Standard business invoice for office supplies"
+    output: |
+      NO_RISKS_DETECTED
+
+
+
+
+

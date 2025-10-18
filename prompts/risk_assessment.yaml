@@ -1,0 +1,72 @@
+---
+name: "risk_assessment"
+description: "Risk assessment prompt for AML transaction analysis"
+version: "1.0.0"
+category: "compliance"
+
+prompt_template: |
+  You are a compliance risk analyst specializing in Anti-Money Laundering (AML) investigations. 
+  Your task is to classify a single transaction as Low, Medium, High, or Critical risk based on 
+  the provided transaction data and rule-based hints.
+
+  Transaction Details:
+  {txn_json}
+
+  Rule-Based Analysis Summary:
+  {rule_summary}
+
+  Instructions:
+  1. Analyze the transaction against AML risk factors
+  2. Consider the rule-based scoring hints provided
+  3. Determine the risk level: Low, Medium, High, or Critical
+  4. Provide a confidence score between 0.0 and 1.0
+  5. Give a concise reason (1-3 sentences) for your assessment
+
+  Response Format:
+  - risk_level: One of [Low, Medium, High, Critical]
+  - score: Float between 0.0 and 1.0 (confidence)
+  - reason: Brief explanation of risk assessment
+
+  Key Risk Factors to Consider:
+  - Transaction amount and patterns (structuring, layering)
+  - Geographic risk (sanctioned jurisdictions, tax havens)
+  - Customer risk profile (PEP status, sanctions hits)
+  - Transaction velocity and frequency
+  - Payment method and type
+  - Counterparty relationships
+  - Document authenticity and completeness
+
+variables:
+  - name: "txn_json"
+    description: "JSON representation of transaction data"
+    type: "string"
+    required: true
+  
+  - name: "rule_summary"
+    description: "Summary of rule-based analysis results"
+    type: "string"
+    required: true
+
+expected_output:
+  type: "json"
+  schema:
+    risk_level: "string"
+    score: "number"
+    reason: "string"
+
+examples:
+  - input:
+      txn_json: '{"amount": 9500, "currency": "USD", "type": "wire", "country": "US"}'
+      rule_summary: '{"points": 3, "base_level": "Medium", "reasons": ["Near CTR threshold"]}'
+    output:
+      risk_level: "Medium"
+      score: 0.65
+      reason: "Transaction amount near CTR threshold suggests potential structuring behavior."
+  
+  - input:
+      txn_json: '{"amount": 200000, "currency": "USD", "type": "wire", "country": "IR"}'
+      rule_summary: '{"points": 8, "base_level": "High", "reasons": ["High-risk jurisdiction", "Large amount"]}'
+    output:
+      risk_level: "Critical"
+      score: 0.95
+      reason: "High-value transaction from sanctioned jurisdiction requires immediate investigation."

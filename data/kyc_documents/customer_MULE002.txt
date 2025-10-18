@@ -1,0 +1,23 @@
+
+KYC Document - Money Mule 2
+Customer ID: MULE002
+Date: 2025-10-17
+
+CUSTOMER INFORMATION:
+- Name: Money Mule 2
+- Type: individual
+- Location: New York, US
+- Risk Level: MEDIUM
+- KYC Status: pending
+
+BUSINESS DETAILS:
+- Established: 2025-02-10
+- Primary Activities: individual operations
+
+COMPLIANCE STATUS:
+- Identity verification: COMPLETED
+- Address verification: COMPLETED
+- Business registration: VERIFIED
+- Financial statements: PROVIDED
+- No adverse media found
+- Standard risk profile

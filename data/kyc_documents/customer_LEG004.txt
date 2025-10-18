@@ -1,0 +1,23 @@
+
+KYC Document - Legitimate Business 4
+Customer ID: LEG004
+Date: 2025-10-17
+
+CUSTOMER INFORMATION:
+- Name: Legitimate Business 4
+- Type: business
+- Location: Los Angeles, US
+- Risk Level: LOW
+- KYC Status: verified
+
+BUSINESS DETAILS:
+- Established: 2024-11-18
+- Primary Activities: business operations
+
+COMPLIANCE STATUS:
+- Identity verification: COMPLETED
+- Address verification: COMPLETED
+- Business registration: VERIFIED
+- Financial statements: PROVIDED
+- No adverse media found
+- Standard risk profile

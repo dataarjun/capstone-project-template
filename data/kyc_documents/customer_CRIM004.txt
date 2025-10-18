@@ -1,0 +1,34 @@
+
+KYC Document - Criminal Entity 4
+Customer ID: CRIM004
+Date: 2025-10-17
+
+CUSTOMER INFORMATION:
+- Name: Criminal Entity 4
+- Type: business
+- Location: Houston, US
+- Risk Level: HIGH
+- KYC Status: pending
+
+BUSINESS DETAILS:
+- Established: 2025-06-28
+- Primary Activities: business operations
+
+RISK INDICATORS:
+- Incomplete documentation provided
+- Unusual business structure
+- High-risk jurisdiction connections
+- Cash-intensive business model
+- Limited business history
+
+COMPLIANCE NOTES:
+- Enhanced due diligence required
+- Regular monitoring recommended
+- Potential PEP connections
+- Unusual transaction patterns observed
+
+DOCUMENTATION STATUS:
+- Identity verification: PENDING
+- Address verification: PENDING
+- Business registration: PENDING
+- Financial statements: INCOMPLETE

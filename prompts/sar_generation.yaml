@@ -1,0 +1,114 @@
+---
+name: "sar_generation"
+description: "Suspicious Activity Report (SAR) generation prompt"
+version: "1.0.0"
+category: "compliance"
+
+prompt_template: |
+  You are generating a Suspicious Activity Report (SAR) for regulatory compliance.
+  Create a comprehensive, legally compliant SAR based on the investigation findings.
+
+  Case Information:
+  - Case ID: {case_id}
+  - Transaction Details: {transaction_details}
+  - Risk Assessment: {risk_assessment}
+  - Investigation Findings: {investigation_findings}
+  - Customer Information: {customer_info}
+
+  Instructions:
+  1. Create a structured SAR report suitable for regulatory submission
+  2. Include all required regulatory elements
+  3. Provide clear, factual narrative without speculation
+  4. Ensure compliance with SAR filing requirements
+  5. Include specific indicators and supporting evidence
+
+  SAR Requirements:
+  - Clear identification of suspicious activity
+  - Specific dates and amounts
+  - Detailed transaction descriptions
+  - Customer and counterparty information
+  - Risk factors and indicators
+  - Investigation timeline
+  - Regulatory recommendations
+
+  Response Format:
+  Generate SAR in JSON format with the following structure:
+  
+  {
+    "title": "Concise SAR title",
+    "summary": "Executive summary of suspicious activity",
+    "indicators": ["List of specific red flags"],
+    "counterparty_context": "Details about involved parties",
+    "timeline": ["Chronological sequence of events"],
+    "recommendation": "Recommended regulatory action"
+  }
+
+  SAR Content Guidelines:
+  - Use factual, objective language
+  - Avoid speculation or unverified claims
+  - Include specific dates, amounts, and details
+  - Focus on suspicious patterns and behaviors
+  - Provide clear rationale for SAR filing
+  - Include relevant regulatory context
+
+variables:
+  - name: "case_id"
+    description: "Unique case identifier"
+    type: "string"
+    required: true
+  
+  - name: "transaction_details"
+    description: "Detailed transaction information"
+    type: "string"
+    required: true
+  
+  - name: "risk_assessment"
+    description: "Risk assessment results and scoring"
+    type: "string"
+    required: true
+  
+  - name: "investigation_findings"
+    description: "Results from investigation analysis"
+    type: "string"
+    required: true
+  
+  - name: "customer_info"
+    description: "Customer profile and background"
+    type: "string"
+    required: true
+
+expected_output:
+  type: "json"
+  schema:
+    title: "string"
+    summary: "string"
+    indicators: "array"
+    counterparty_context: "string"
+    timeline: "array"
+    recommendation: "string"
+
+examples:
+  - input:
+      case_id: "SAR-2024-001"
+      transaction_details: "Wire transfer $500,000 from Nigeria to Switzerland, PEP customer"
+      risk_assessment: "Risk Score: 95/100, Level: Critical, PEP involvement detected"
+      investigation_findings: "PEP customer with large international transfer, no clear business purpose"
+      customer_info: "Minister Adebayo Gov, Nigerian Government Official, PEP status confirmed"
+    output:
+      title: "Suspicious Activity Report - PEP Large Value Transfer"
+      summary: "High-value international wire transfer by PEP customer without clear business purpose. Transaction involves $500,000 transfer from Nigeria to Switzerland by government official."
+      indicators:
+        - "PEP involvement - Nigerian government minister"
+        - "Large value transaction - $500,000"
+        - "International wire transfer"
+        - "No clear business purpose identified"
+        - "High-risk jurisdiction involvement"
+      counterparty_context: "Customer: Minister Adebayo Gov, Nigerian Government Official. Counterparty: Swiss bank account. Transaction initiated from Nigerian financial institution."
+      timeline:
+        - "2024-01-15: Transaction initiated by PEP customer"
+        - "2024-01-15: Wire transfer processed for $500,000"
+        - "2024-01-16: AML monitoring system flagged transaction"
+        - "2024-01-16: Investigation initiated"
+        - "2024-01-17: PEP status confirmed"
+        - "2024-01-17: SAR filing decision made"
+      recommendation: "File SAR with FinCEN and relevant regulatory authorities. Recommend enhanced monitoring of all PEP transactions and consideration of account restrictions."

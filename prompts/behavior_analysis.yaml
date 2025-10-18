@@ -1,0 +1,85 @@
+---
+name: "behavior_analysis"
+description: "Behavioral pattern analysis for AML detection"
+version: "1.0.0"
+category: "compliance"
+
+prompt_template: |
+  You are a behavioral analyst specializing in Anti-Money Laundering (AML) pattern detection.
+  Analyze the customer's transaction behavior to identify suspicious patterns and activities.
+
+  Customer Information:
+  {customer_data}
+
+  Transaction History:
+  {transaction_history}
+
+  Current Transaction:
+  {current_transaction}
+
+  Instructions:
+  1. Analyze the customer's transaction patterns
+  2. Look for behavioral red flags and suspicious activities
+  3. Identify potential structuring, layering, or integration patterns
+  4. Assess customer risk profile based on behavior
+  5. Provide specific behavioral indicators
+
+  Key Behavioral Patterns to Detect:
+  - Structuring: Breaking large transactions into smaller amounts
+  - Layering: Complex transaction chains to obscure origin
+  - Integration: Introducing laundered funds into legitimate economy
+  - Rapid cycling: Quick deposits and withdrawals
+  - Unusual timing: Transactions at odd hours or patterns
+  - Geographic anomalies: Unexpected transaction locations
+  - Velocity changes: Sudden increases in transaction frequency
+  - Round amounts: Consistent round-number transactions
+  - New account behavior: Suspicious activity in new accounts
+
+  Response Format:
+  Provide behavioral analysis in the following structure:
+  
+  BEHAVIORAL_RISK_SCORE: [1-10]
+  PATTERNS_DETECTED: [list of patterns found]
+  RISK_INDICATORS: [specific behavioral red flags]
+  RECOMMENDATION: [next steps based on analysis]
+
+variables:
+  - name: "customer_data"
+    description: "Customer profile and account information"
+    type: "string"
+    required: true
+  
+  - name: "transaction_history"
+    description: "Historical transaction data for pattern analysis"
+    type: "string"
+    required: true
+  
+  - name: "current_transaction"
+    description: "Current transaction being analyzed"
+    type: "string"
+    required: true
+
+expected_output:
+  type: "structured_text"
+  format: "behavioral_analysis"
+
+examples:
+  - input:
+      customer_data: '{"customer_id": "CUST001", "account_age_days": 30, "risk_level": "medium"}'
+      transaction_history: '[{"amount": 9500, "timestamp": "2024-01-01"}, {"amount": 9250, "timestamp": "2024-01-02"}, {"amount": 9800, "timestamp": "2024-01-03"}]'
+      current_transaction: '{"amount": 9600, "type": "deposit", "timestamp": "2024-01-04"}'
+    output: |
+      BEHAVIORAL_RISK_SCORE: 8
+      PATTERNS_DETECTED: STRUCTURING, CONSISTENT_AMOUNTS, HIGH_FREQUENCY
+      RISK_INDICATORS: Multiple transactions just under $10k threshold, consistent amounts over 4 days, new account with high activity
+      RECOMMENDATION: Enhanced monitoring required, consider SAR filing
+  
+  - input:
+      customer_data: '{"customer_id": "CUST002", "account_age_days": 365, "risk_level": "low"}'
+      transaction_history: '[{"amount": 500, "timestamp": "2024-01-01"}, {"amount": 750, "timestamp": "2024-01-15"}]'
+      current_transaction: '{"amount": 1200, "type": "transfer", "timestamp": "2024-01-30"}'
+    output: |
+      BEHAVIORAL_RISK_SCORE: 2
+      PATTERNS_DETECTED: NORMAL_ACTIVITY
+      RISK_INDICATORS: Regular transaction pattern, moderate amounts, established account
+      RECOMMENDATION: Continue routine monitoring

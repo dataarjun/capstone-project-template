@@ -1,0 +1,130 @@
+---
+name: "edd_report"
+description: "Enhanced Due Diligence report generation prompt"
+version: "1.0.0"
+category: "compliance"
+
+prompt_template: |
+  You are conducting Enhanced Due Diligence (EDD) for an Anti-Money Laundering (AML) investigation.
+  Perform a comprehensive analysis combining all available risk factors and provide critical risk indicators.
+
+  Investigation Context:
+  - PEP Status: {pep_status}
+  - Sanctions Hits: {sanction_hits}
+  - Risk Factors: {risk_factors}
+  - Customer Profile: {customer_profile}
+  - Transaction Details: {transaction_details}
+
+  Instructions:
+  1. Conduct deep AML investigation analysis
+  2. Consider all available risk factors comprehensively
+  3. Identify critical risk indicators in UPPERCASE format
+  4. Provide detailed assessment and recommendations
+  5. Generate actionable next steps
+
+  Analysis Framework:
+  - Customer Risk Assessment (PEP, sanctions, reputation)
+  - Transaction Risk Analysis (amount, type, pattern, geography)
+  - Business Relationship Risk (counterparties, intermediaries)
+  - Document and KYC Risk (completeness, authenticity)
+  - Behavioral Risk (patterns, anomalies, red flags)
+
+  Critical Risk Categories:
+  - SANCTIONS_COMPLIANCE: Violations of sanctions regimes
+  - PEP_EXPOSURE: Politically Exposed Person involvement
+  - HIGH_RISK_JURISDICTION: Transactions involving high-risk countries
+  - COMPLEX_STRUCTURES: Layered or complex transaction structures
+  - DOCUMENT_ANOMALIES: Suspicious or incomplete documentation
+  - BEHAVIORAL_RED_FLAGS: Unusual customer behavior patterns
+  - COUNTERPARTY_RISKS: High-risk business relationships
+  - VELOCITY_ANOMALIES: Unusual transaction frequency or amounts
+
+  Response Format:
+  Provide your analysis in the following structure:
+
+  **ENHANCED DUE DILIGENCE REPORT**
+  
+  **SUBJECT:** [Customer/Entity Name]
+  **PEP STATUS:** [TRUE/FALSE]
+  **SANCTIONS HITS:** [List of hits or NONE]
+  **RISK FACTORS:** [List of identified factors]
+  
+  **CRITICAL RISK INDICATORS:**
+  [Detailed analysis of each critical indicator]
+  
+  **INVESTIGATION FINDINGS:**
+  [Comprehensive findings and analysis]
+  
+  **RECOMMENDATIONS:**
+  [Specific actionable recommendations]
+  
+  **NEXT STEPS:**
+  [Immediate next steps for investigation]
+
+variables:
+  - name: "pep_status"
+    description: "Politically Exposed Person status"
+    type: "boolean"
+    required: true
+  
+  - name: "sanction_hits"
+    description: "List of sanctions database hits"
+    type: "string"
+    required: true
+  
+  - name: "risk_factors"
+    description: "Identified risk factors from previous analysis"
+    type: "string"
+    required: true
+  
+  - name: "customer_profile"
+    description: "Customer profile and background information"
+    type: "string"
+    required: true
+  
+  - name: "transaction_details"
+    description: "Transaction details and context"
+    type: "string"
+    required: true
+
+expected_output:
+  type: "structured_report"
+  format: "edd_report"
+
+examples:
+  - input:
+      pep_status: "TRUE"
+      sanction_hits: "NONE"
+      risk_factors: "HIGH_RISK_JURISDICTION_IR, LARGE_TRANSACTION"
+      customer_profile: "Minister Adebayo Gov, Nigerian Government Official"
+      transaction_details: "Wire transfer $500,000 from Nigeria to Switzerland"
+    output: |
+      **ENHANCED DUE DILIGENCE REPORT**
+      
+      **SUBJECT:** Minister Adebayo Gov
+      **PEP STATUS:** TRUE
+      **SANCTIONS HITS:** NONE
+      **RISK FACTORS:** HIGH_RISK_JURISDICTION_IR, LARGE_TRANSACTION
+      
+      **CRITICAL RISK INDICATORS:**
+      - **PEP EXPOSURE**: High-risk due to government position
+      - **LARGE TRANSACTION**: Significant amount requires scrutiny
+      - **CROSS_BORDER_TRANSFER**: International wire transfer
+      
+      **INVESTIGATION FINDINGS:**
+      This case involves a high-value international wire transfer by a PEP from a medium-risk jurisdiction. The combination of PEP status and large transaction amount creates elevated AML risk.
+      
+      **RECOMMENDATIONS:**
+      1. Enhanced monitoring of all PEP transactions
+      2. Verification of legitimate business purpose
+      3. Consider SAR filing based on further investigation
+      
+      **NEXT STEPS:**
+      1. Obtain additional documentation
+      2. Verify source of funds
+      3. Monitor for additional suspicious activity
+
+
+
+
+

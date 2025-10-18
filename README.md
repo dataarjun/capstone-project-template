@@ -1,98 +1,248 @@
-# Capstone Project Template
+# Multi-Agent AML Investigation System
 
-This is a template repository for capstone projects. Use this as a starting point for your project structure and documentation.
+A sophisticated Anti-Money Laundering (AML) investigation system built with multi-agent AI architecture, featuring LangGraph workflows, FastAPI backend, and comprehensive chat capabilities.
 
-## Project Overview
+## 🚀 Features
 
-[Describe your project here. Include:]
-- **Problem Statement**: What problem are you solving?
-- **Solution Approach**: How are you approaching the solution?
-- **Expected Outcomes**: What do you hope to achieve?
+- **Multi-Agent Architecture**: Specialized AI agents for risk assessment, pattern analysis, and investigation coordination
+- **LangGraph Workflows**: Complex AML investigation workflows with state management
+- **FastAPI Backend**: RESTful API with comprehensive chat functionality
+- **Real-time Chat**: Interactive chat system for AML case investigation
+- **Risk Assessment**: Automated risk scoring and analysis
+- **Document Analysis**: KYC document processing and analysis
+- **Investigation Management**: Thread-based investigation tracking
 
-## Project Structure
+## 🏗️ Architecture
 
 ```
-├── README.md                 # This file
-├── .gitignore               # Git ignore rules
-├── requirements.txt         # Python dependencies (if applicable)
-├── data/                    # Raw data files
-├── notebooks/               # Jupyter notebooks for exploration
-├── src/                     # Source code
-│   ├── data/               # Data processing modules
-│   ├── models/             # Model implementations
-│   ├── utils/              # Utility functions
-│   └── main.py             # Main entry point
-├── experiments/             # Experiment configurations and results
-├── docs/                    # Documentation
-├── tests/                   # Test files
-└── results/                 # Final results and outputs
+├── app/
+│   ├── agents/           # AI agents and workflows
+│   ├── api/             # FastAPI routes and endpoints
+│   ├── core/            # Core configuration and utilities
+│   ├── db/              # Database models and connections
+│   ├── models/          # Pydantic models
+│   ├── services/        # Business logic services
+│   └── utils/           # Utility functions
+├── notebooks/           # Jupyter notebooks for testing
+├── prompts/             # Prompt templates
+├── scripts/             # Setup and utility scripts
+└── tests/               # Test suites
 ```
 
-## Getting Started
+## 🛠️ Installation
 
 ### Prerequisites
 
-- [List any prerequisites, e.g., Python 3.8+, specific libraries, etc.]
+- Python 3.10+
+- PostgreSQL (or use Docker)
+- OpenAI API key
 
-### Installation
+### Setup
 
-1. Clone this repository:
+1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
-   cd <project-name>
+   git clone <repository-url>
+   cd multi-agent-aml-system
    ```
 
-2. Create a virtual environment:
+2. **Create virtual environment**
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. Install dependencies:
+3. **Install dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-### Usage
+4. **Environment configuration**
+   ```bash
+   cp env.example .env
+   # Edit .env with your configuration
+   ```
 
-[Provide instructions on how to use your project]
+5. **Database setup**
+   ```bash
+   python scripts/init_database.py
+   ```
 
-## Data
+## 🚀 Quick Start
 
-[Describe your data sources, format, and any preprocessing steps]
+### Start the Server
 
-## Methodology
+```bash
+python run_server.py
+```
 
-[Describe your approach, algorithms, or methodology]
+The API will be available at `http://localhost:8002`
 
-## Results
+### API Documentation
 
-[Include key findings, metrics, and visualizations]
+Visit `http://localhost:8002/docs` for interactive API documentation.
 
-## Contributing
+### Chat API Usage
 
-[If this is a collaborative project, include contribution guidelines]
+```python
+import requests
 
-## License
+# Send a chat message
+response = requests.post("http://localhost:8002/api/chat/message", json={
+    "prompt": "What is the risk distribution across investigations?",
+    "thread_id": None  # Auto-creates thread
+})
 
-[Specify your license]
+print(response.json())
+```
 
-## Acknowledgments
+## 📊 API Endpoints
 
-[Acknowledge any sources, collaborators, or resources used]
+### Chat Endpoints
+- `POST /api/chat/message` - Send chat message
+- `POST /api/chat/threads` - Create new thread
+- `GET /api/chat/threads` - List all threads
+- `GET /api/chat/threads/{thread_id}` - Get thread history
+- `GET /api/chat/statistics` - Get global statistics
 
-## Contact
+### Investigation Endpoints
+- `POST /api/investigate` - Start new investigation
+- `GET /api/investigations` - List investigations
+- `GET /api/investigations/{investigation_id}` - Get investigation details
 
-[Your contact information]
+## 🧪 Testing
+
+### Run Tests
+```bash
+python -m pytest tests/
+```
+
+### Interactive Testing
+```bash
+# Start Jupyter notebooks
+jupyter notebook notebooks/
+
+# Run API tests
+python test_api.py
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+```bash
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/aml_db
+
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key
+
+# LangSmith (optional)
+LANGSMITH_API_KEY=your_langsmith_key
+LANGSMITH_PROJECT=aml-multi-agent-system
+
+# Server
+HOST=0.0.0.0
+PORT=8002
+```
+
+### Agent Configuration
+
+The system uses specialized agents for different AML tasks:
+
+- **Risk Assessor**: Evaluates transaction risk levels
+- **Pattern Analyst**: Identifies suspicious patterns
+- **Data Enrichment**: Gathers additional context
+- **Report Synthesizer**: Generates investigation reports
+- **Coordinator**: Manages workflow orchestration
+
+## 📈 Usage Examples
+
+### 1. Basic Chat Interaction
+
+```python
+# Create a new conversation
+response = requests.post("http://localhost:8002/api/chat/message", json={
+    "prompt": "Analyze the risk factors in case #12345",
+    "thread_id": None
+})
+
+thread_id = response.json()["thread_id"]
+
+# Continue the conversation
+response = requests.post("http://localhost:8002/api/chat/message", json={
+    "prompt": "What are the key findings?",
+    "thread_id": thread_id
+})
+```
+
+### 2. Investigation Workflow
+
+```python
+# Start new investigation
+response = requests.post("http://localhost:8002/api/investigate", json={
+    "transaction_id": "TXN-12345",
+    "user_query": "Investigate this high-value transaction"
+})
+
+investigation_id = response.json()["investigation_id"]
+```
+
+### 3. Get Statistics
+
+```python
+# Get global statistics
+response = requests.get("http://localhost:8002/api/chat/statistics")
+stats = response.json()
+
+print(f"Total investigations: {stats['total_investigations']}")
+print(f"High risk cases: {stats['high_risk_cases']}")
+```
+
+## 🐳 Docker Support
+
+```bash
+# Build and run with Docker Compose
+docker-compose up --build
+
+# Or build individual container
+docker build -t aml-system .
+docker run -p 8002:8002 aml-system
+```
+
+## 📚 Documentation
+
+- [API Documentation](http://localhost:8002/docs) - Interactive API docs
+- [Notebooks](notebooks/) - Jupyter notebooks for testing and examples
+- [Prompts](prompts/) - AI prompt templates
+- [Architecture Guide](docs/) - Detailed system architecture
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+For support and questions:
+- Create an issue in the repository
+- Check the [documentation](docs/)
+- Review the [notebooks](notebooks/) for examples
+
+## 🔮 Roadmap
+
+- [ ] Enhanced pattern recognition
+- [ ] Real-time monitoring dashboard
+- [ ] Advanced reporting features
+- [ ] Integration with external AML systems
+- [ ] Machine learning model improvements
 
 ---
 
-## Template Usage Notes
-
-This template includes:
-- A comprehensive `.gitignore` file for common file types
-- A structured README template
-- Suggested directory structure for organizing your project
-- Placeholders for common project components
-
-Feel free to modify this template to suit your specific project needs!
+**Note**: This system is designed for educational and research purposes. For production use, ensure proper security measures and compliance with relevant regulations.

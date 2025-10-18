@@ -1,0 +1,23 @@
+
+KYC Document - Legitimate Business 17
+Customer ID: LEG017
+Date: 2025-10-17
+
+CUSTOMER INFORMATION:
+- Name: Legitimate Business 17
+- Type: business
+- Location: New York, US
+- Risk Level: LOW
+- KYC Status: verified
+
+BUSINESS DETAILS:
+- Established: 2025-02-23
+- Primary Activities: business operations
+
+COMPLIANCE STATUS:
+- Identity verification: COMPLETED
+- Address verification: COMPLETED
+- Business registration: VERIFIED
+- Financial statements: PROVIDED
+- No adverse media found
+- Standard risk profile

@@ -1,0 +1,23 @@
+
+KYC Document - Legitimate Business 5
+Customer ID: LEG005
+Date: 2025-10-17
+
+CUSTOMER INFORMATION:
+- Name: Legitimate Business 5
+- Type: business
+- Location: Phoenix, US
+- Risk Level: LOW
+- KYC Status: verified
+
+BUSINESS DETAILS:
+- Established: 2025-05-28
+- Primary Activities: business operations
+
+COMPLIANCE STATUS:
+- Identity verification: COMPLETED
+- Address verification: COMPLETED
+- Business registration: VERIFIED
+- Financial statements: PROVIDED
+- No adverse media found
+- Standard risk profile
